@@ -9,7 +9,7 @@
 OneWire  ds(2);  // on pin 2 (a 4.7K resistor is necessary)
 RF24 radio(10, 9); //CSN, CE
 RF24Network network(radio);      // Include the radio in the network
-const uint16_t node02 = 02;  // Address of our node in Octal format ( 04,031, etc)
+const uint16_t //node02 =  '02'; //CHANGE TO NODE NUMBER  // Address of our node in Octal format ( 04,031, etc)
 const uint16_t hub = 00;    // Address of the other node in Octal format
 
 void setup() {
@@ -17,7 +17,7 @@ void setup() {
   Serial.begin(9600);
   SPI.begin();
   radio.begin();
-  network.begin(90, node02);  //(channel, node address)
+  network.begin(90, //node02 //CHANGE TO NAME OF NODE );  //(channel, node address)
 }
 
 void loop(void) {
@@ -125,8 +125,7 @@ void loop(void) {
 
   network.update();
   
-  char text[] = "Node 2";
-  RF24NetworkHeader header(hub, '2');
+  RF24NetworkHeader header(hub, //'2' //CHANGE TO NODE NUMBER);
   bool ok = network.write(header, &fahrenheit, sizeof(fahrenheit)); // Send the data
   if (ok){
     Serial.println("Delivered");
